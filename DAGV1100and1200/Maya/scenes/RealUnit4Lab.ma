@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
 //Name: RealUnit4Lab.ma
-//Last modified: Sat, Sep 27, 2025 12:51:42 PM
+//Last modified: Sat, Sep 27, 2025 01:01:42 PM
 //Codeset: 1252
 requires maya "2025ff03";
 requires -nodeType "aiOptions" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter" -nodeType "aiImagerDenoiserOidn"
@@ -11,19 +11,19 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202409190603-cbdc5a7e54";
 fileInfo "osv" "Windows 11 Enterprise v2009 (Build: 26100)";
-fileInfo "UUID" "AC608905-447F-3962-5430-33A8F1C404D5";
+fileInfo "UUID" "C294A6CA-42AB-2A17-0884-78BE79B468A3";
 fileInfo "license" "education";
 createNode transform -s -n "persp";
 	rename -uid "E99FEB28-4E64-D1E2-C9F0-BDBBC5ADB237";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 4.7015846503395746 0.95690668319169647 6.6829282118661002 ;
-	setAttr ".r" -type "double3" -4.7999999999989802 405.19999999996867 5.6422088164476351e-16 ;
+	setAttr ".t" -type "double3" -2.4638505303407037 -0.45105108276622863 4.7472465915416899 ;
+	setAttr ".r" -type "double3" 13.200000000010409 315.99999999986915 -1.105372829354496e-15 ;
 	setAttr ".rpt" -type "double3" 2.7939880227787955e-15 2.8874384294125019e-15 7.0635605241415519e-16 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "A60814AB-4C91-56EE-35F5-74851EA5CB42";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999979;
-	setAttr ".coi" 6.5225291402327894;
+	setAttr ".coi" 3.7756221117662094;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -65,7 +65,7 @@ createNode camera -s -n "frontShape" -p "front";
 createNode transform -s -n "side";
 	rename -uid "8526A652-4E36-5C55-1696-6A90172DFA45";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -0.0080784460047869516 0.55880975919688258 -997.9969489250899 ;
+	setAttr ".t" -type "double3" -0.052503105566078623 -0.25864884320534715 -997.9969489250899 ;
 	setAttr ".r" -type "double3" 0 180.00000000000003 0 ;
 	setAttr ".rpt" -type "double3" 3.7578522030170828e-14 -5.3308948363257934e-14 1.8883749694913139e-13 ;
 createNode camera -s -n "sideShape" -p "side";
@@ -73,7 +73,7 @@ createNode camera -s -n "sideShape" -p "side";
 	setAttr -k off ".v" no;
 	setAttr ".rnd" no;
 	setAttr ".coi" 1000.1000000000014;
-	setAttr ".ow" 0.99008150666621997;
+	setAttr ".ow" 4.9621404984405224;
 	setAttr ".imn" -type "string" "side";
 	setAttr ".den" -type "string" "side_depth";
 	setAttr ".man" -type "string" "side_mask";
@@ -4782,6 +4782,15 @@ createNode script -n "sceneConfigurationScriptNode";
 	rename -uid "530BEC10-4ED6-EA40-5CD5-C6B5412A99AF";
 	setAttr ".b" -type "string" "playbackOptions -min 1 -max 120 -ast 1 -aet 200 ";
 	setAttr ".st" 6;
+createNode polySmoothFace -n "polySmoothFace1";
+	rename -uid "2C0153FC-4016-A326-3F57-9A8EC04EE60E";
+	setAttr ".ics" -type "componentList" 27 "f[614:615]" "f[617:625]" "f[627:635]" "f[639:640]" "f[642:650]" "f[652:660]" "f[665:666]" "f[668:676]" "f[678:686]" "f[690:691]" "f[693:701]" "f[703:711]" "f[789:790]" "f[792:800]" "f[802:810]" "f[814:815]" "f[817:825]" "f[827:835]" "f[876:877]" "f[879:887]" "f[889:897]" "f[902:903]" "f[905:913]" "f[915:923]" "f[927:928]" "f[930:938]" "f[940:948]";
+	setAttr ".sdt" 2;
+	setAttr ".suv" yes;
+	setAttr ".ps" 0.10000000149011612;
+	setAttr ".ro" 1;
+	setAttr ".ma" yes;
+	setAttr ".m08" yes;
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
@@ -4827,7 +4836,7 @@ select -ne :hardwareRenderGlobals;
 	setAttr ".btrs" 512;
 select -ne :ikSystem;
 	setAttr -s 4 ".sol";
-connectAttr "polyBevel1.out" "revolvedSurfaceShape1.i";
+connectAttr "polySmoothFace1.out" "revolvedSurfaceShape1.i";
 relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
@@ -4845,6 +4854,7 @@ connectAttr "revolvedSurfaceShape1.wm" "polyExtrudeFace1.mp";
 connectAttr "polyTweak1.out" "polyBevel1.ip";
 connectAttr "revolvedSurfaceShape1.wm" "polyBevel1.mp";
 connectAttr "polyExtrudeFace1.out" "polyTweak1.ip";
+connectAttr "polyBevel1.out" "polySmoothFace1.ip";
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 connectAttr "revolvedSurfaceShape1.iog" ":initialShadingGroup.dsm" -na;
 // End of RealUnit4Lab.ma
